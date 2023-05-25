@@ -8,6 +8,7 @@ function App() {
   const [hourlyRate, setHourlyRate] = useState(150);
   const [value, setValue] = useState(0);
   const [currency, setCurrency] = useState("HKD");
+  const [currencyList, setCurrencyList] = useState([] as string[]);
 
   const formatter = new Intl.NumberFormat(undefined, { style: "currency", currency });
 
@@ -27,6 +28,13 @@ function App() {
       return () => clearInterval(id);
     }
   }, [isPlaying]);
+
+  useEffect(() => {
+    try {
+      setCurrencyList(Intl.supportedValuesOf("currency"));
+    }
+    catch (e) {}
+  }, []);
 
   return (
     <>
@@ -51,14 +59,17 @@ function App() {
         <button onClick={() => setPeopleCount((count) => count + 1)}>
           +1
         </button>
-        <label>
-          Currency{' '}
-          <select value={currency} onChange={e => setCurrency(e.target.value)}>
-          {
-            Intl.supportedValuesOf("currency").map(c => <option key={c} value={c}>{c}</option>)
-          }
-          </select>
-        </label>
+        {
+          currencyList.length > 0 &&
+          <label>
+            Currency{' '}
+            <select value={currency} onChange={e => setCurrency(e.target.value)}>
+            {
+              currencyList.map(c => <option key={c} value={c}>{c}</option>)
+            }
+            </select>
+          </label>
+        }
       </div>
     </>
   )
