@@ -1,0 +1,27 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+  color: white;
+}
+
+h1.cost {
+  font-size: 15rem;
+}
+
+.card {
+  padding: 2em;
+}
+
+label {
+  display: block;
+  margin: 0.5em 0;
+}
+
+label,
+input,
+select {
+  font-size: 1.4rem;
+}
